@@ -1,0 +1,7 @@
+# Build
+target/
+*.class
+dependency-reduced-pom.xml
+
+# IntelliJ
+**/.idea/*
