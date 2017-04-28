@@ -5,3 +5,7 @@ dependency-reduced-pom.xml
 
 # IntelliJ
 **/.idea/*
+*.iml
+
+# Other
+phantomjsdriver.log
