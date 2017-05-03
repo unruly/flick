@@ -54,9 +54,11 @@ public void shouldRestrictToDateRange() {
 }
 ```
 
-By encapsulating interactions and validations within interfaces that only expose the Browser, the Screenplay pattern guides us towards higher-level abstractions and decoupling from implementation - there is no reason that Browser could not be replaced with something that inspects a command-line application instead of a web-page.
+## Why would I use Flick/the Screenplay pattern?
 
-The implementation can be refactored without changing the tests outside of swapping in new actions/assertions.
+the Screenplay pattern guides us towards higher-level abstractions and decoupling from implementation - by encapsulating interactions and validations within interfaces that only expose the Browser.
+
+The implementation can then be refactored without changing the tests outside of swapping in new actions/assertions, leading to less brittle, more robust tests.
 
 ## Concepts in Flick
 
