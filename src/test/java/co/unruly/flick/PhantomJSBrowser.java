@@ -44,4 +44,7 @@ public class PhantomJSBrowser implements Browser {
         this.driver.quit();
     }
 
+    public void hello() {
+        ((PhantomJSDriver) driver).executePhantomJS("console.log('Hello!');");
+    }
 }

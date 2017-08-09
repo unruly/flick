@@ -1,6 +1,5 @@
 package co.unruly.flick;
 
-import co.unruly.flick.browser.Browser;
 import co.unruly.flick.browser.Page;
 import co.unruly.flick.dsl.Action;
 import co.unruly.flick.dsl.Actor;
@@ -13,13 +12,14 @@ public class ExampleTest implements FlickDSL {
 
     private static class User implements Actor {}
 
-    private final Browser browser = new PhantomJSBrowser();
+    private final PhantomJSBrowser browser = new PhantomJSBrowser();
 
     @Test
     public void shouldLoadPage() {
         Actor actor = new User();
 
         Page page = given(actor.using(browser, "http://example.com"))
+                .wasAbleTo(logHelloUsingJS())
                 .hasHappened();
 
         then(actor.using(browser, page))
@@ -45,6 +45,10 @@ public class ExampleTest implements FlickDSL {
 
     private Action getMoreInfo() {
         return (browser) -> browser.findElement(By.xpath("/html/body/div/p[2]/a")).click();
+    }
+
+    private Action<PhantomJSBrowser> logHelloUsingJS() {
+        return PhantomJSBrowser::hello;
     }
 
     private Assertion beOnPage(String expectedUrl) {
