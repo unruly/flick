@@ -14,9 +14,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public interface BrowserAssertions {
     WebDriver getDriver();
 
+    default int timeout() { return 5; }
+
     default void waitUntil(Supplier<Boolean> condition) {
         try {
-            new WebDriverWait(getDriver(), 5).until((com.google.common.base.Predicate<WebDriver>) webDriver -> {
+            new WebDriverWait(getDriver(), timeout()).until((com.google.common.base.Predicate<WebDriver>) webDriver -> {
                 return condition.get();
             });
         } catch (TimeoutException e) {
@@ -26,7 +28,7 @@ public interface BrowserAssertions {
 
     default <T> void waitUntilEquals(Supplier<T> elementFinder, T value) {
         try {
-            new WebDriverWait(getDriver(), 5).until((com.google.common.base.Predicate<WebDriver>) webDriver -> {
+            new WebDriverWait(getDriver(), timeout()).until((com.google.common.base.Predicate<WebDriver>) webDriver -> {
                 return Objects.equals(elementFinder.get(), value);
             });
         } catch (TimeoutException e) {
@@ -36,7 +38,7 @@ public interface BrowserAssertions {
 
     default void waitUntilMatches(Supplier<Object> elementFinder, Matcher<String> valueMatcher) {
         try {
-            new WebDriverWait(getDriver(), 5).until((com.google.common.base.Predicate<WebDriver>) webDriver -> {
+            new WebDriverWait(getDriver(), timeout()).until((com.google.common.base.Predicate<WebDriver>) webDriver -> {
                 return valueMatcher.matches(elementFinder.get());
             });
         } catch (TimeoutException e) {
